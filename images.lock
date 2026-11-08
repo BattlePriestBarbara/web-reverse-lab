@@ -1,0 +1,38 @@
+# =============================================================================
+# 镜像锁：左边是**本工程内部使用的规范名**（compose 只认它），右边是**去哪拿**。
+#
+# 为什么需要这层间接：本机的 registry-1.docker.io 被解析到 Facebook 段
+# （实测 2a03:2880:f11a:83:face:b00c:0:25de:443），官方名直接 pull 必失败；
+# 而镜像站 docker.1ms.run 可用，且它的大 blob 走 Cloudflare IPv6 会偶发被重置
+# （实测 2606:4700:3010::f753:1c2f wsarecv: An existing connection was forcibly closed）。
+#
+# 所以：站点可换、重试要够、规范名不变。compose 文件里永远不会出现镜像站域名，
+# 换源只改这一个文件的第二列。
+#
+# 格式（竖线分隔，四列）：
+#   <规范名：tag>|<镜像站上的仓库路径>|<tag>|<可选 digest 锁>
+# 第二列留空 = 该镜像已在本地产出、不需要拉取。
+# =============================================================================
+
+web-reverse-lab/mitmproxy:11.1.0|mitmproxy/mitmproxy|11.1.0|
+web-reverse-lab/juice-shop:latest|bkimminich/juice-shop|latest|
+web-reverse-lab/httpx:latest|projectdiscovery/httpx|latest|
+web-reverse-lab/nuclei:latest|projectdiscovery/nuclei|latest|
+web-reverse-lab/katana:latest|projectdiscovery/katana|latest|
+
+# --- 已落地产地（2026-11-07 首次拉取） ---------------------------------------
+# mitmproxy 11.1.0
+#   digest sha256:0b8cfc0cc65aa76490dffb987afd448d994c16c502d0170942bf133670181077
+#   来源 docker.1ms.run/mitmproxy/mitmproxy:11.1.0 -> retag 为 web-reverse-lab/mitmproxy:11.1.0
+#   镜像内 Python 3.13；**以 root 运行**，默认 confdir=/root/.mitmproxy
+#   （compose 里因此把证书目录挂到 /root/.mitmproxy，并把根文件系统设为只读）
+# juice-shop
+#   沿用你既有的 bkimminich/juice-shop 容器（127.0.0.1:3000），本工程未重复拉取
+# katana（2026-11-07 拉取，P2 的 L2 爬虫）
+#   来源 docker.1ms.run/projectdiscovery/katana:latest -> retag 为 web-reverse-lab/katana:latest
+#   体积 1.28 GB（镜像内自带 chromium，给 -headless 用；本阶段只用静态爬取与 JS 解析，
+#   不执行 JS，故 compose 里 mem_limit=1g 足够、也刻意不传 -headless）
+#   入口是 /usr/local/bin/katana，compose 里显式写 entrypoint 钉死
+#   注意：-jc 是"解析 JS 文件里的端点"，与 -headless（真的执行 JS）不是一回事，
+#        报告里不能把前者说成后者。
+

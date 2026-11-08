@@ -1,0 +1,11 @@
+# 运行产物：证据、证书、下载的前端资产。全部不入库。
+evidence/
+artifacts/
+reports/
+
+# 运行期配置（含目标地址与别名，随环境变化）
+.env
+
+# Python
+__pycache__/
+*.py[cod]

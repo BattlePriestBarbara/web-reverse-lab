@@ -1,0 +1,2975 @@
+{
+  "schema": "web-reverse-lab/contract",
+  "schema_version": 1,
+  "run_id": "p2_final",
+  "generated_at": "2026-11-08T06:24:07Z",
+  "generated_by": "collectors/har_to_contract.py",
+  "target": {
+    "base_url": "http://127.0.0.1:3000",
+    "profile": "juice_shop",
+    "canonical_origin": "127.0.0.1:3000"
+  },
+  "sources": {
+    "har": "D:\\web_reverse_lab\\evidence\\har\\p2_final.har",
+    "har_creator": {
+      "name": "mitmproxy",
+      "version": "11.1.0",
+      "comment": ""
+    },
+    "har_entries": 76,
+    "flows": "D:\\web_reverse_lab\\evidence\\flows\\p2_final.jsonl",
+    "flow_lines_joined": 76,
+    "flow_lines_unjoined": 0,
+    "flow_bad_lines": 0,
+    "join_key": "method + path?query + timestamp_start(ms)"
+  },
+  "counts": {
+    "endpoints": 68,
+    "by_kind": {
+      "static": 20,
+      "document": 37,
+      "other": 5,
+      "api": 6
+    },
+    "spa_shell": 19,
+    "out_of_scope_flows": 2
+  },
+  "notes": [
+    "HAR 里是 addon 改写后的 authority；客户端原始 authority 见各端点 observed_authorities（来自 flows JSONL）",
+    "evidence_ref 同时给 har#entry-N 与 flows#seq-N：前者证明交换发生过，后者是崩溃安全的单行证据锚点",
+    "params 的 observed_values 只记 query 值；body 只记字段名（值可能含凭据）"
+  ],
+  "endpoints": [
+    {
+      "id": "ep_0001",
+      "method": "GET",
+      "path": "/robots.txt",
+      "path_samples": [
+        "/robots.txt"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/plain"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "09f7c2328189ecdd",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794118999.097,
+        "first_client": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+        "clients": [
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:19.097Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-1",
+        "flows/p2_final.jsonl#seq-2"
+      ]
+    },
+    {
+      "id": "ep_0002",
+      "method": "GET",
+      "path": "/sitemap.xml",
+      "path_samples": [
+        "/sitemap.xml"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794118999.318,
+        "first_client": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+        "clients": [
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:19.317Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-2",
+        "flows/p2_final.jsonl#seq-3"
+      ]
+    },
+    {
+      "id": "ep_0003",
+      "method": "GET",
+      "path": "/ftp",
+      "path_samples": [
+        "/ftp"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000",
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "cc56328a0ad49b36",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119006.629,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1",
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 2,
+        "first_seen_iso": "2026-11-08T06:23:26.628Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-5",
+        "flows/p2_final.jsonl#seq-6",
+        "har/p2_final.har#entry-74",
+        "flows/p2_final.jsonl#seq-75"
+      ]
+    },
+    {
+      "id": "ep_0004",
+      "method": "GET",
+      "path": "/",
+      "path_samples": [
+        "/"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000",
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119006.63,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1",
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 3,
+        "first_seen_iso": "2026-11-08T06:23:26.629Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-4",
+        "flows/p2_final.jsonl#seq-5",
+        "har/p2_final.har#entry-19",
+        "flows/p2_final.jsonl#seq-20",
+        "har/p2_final.har#entry-61",
+        "flows/p2_final.jsonl#seq-62"
+      ]
+    },
+    {
+      "id": "ep_0005",
+      "method": "GET",
+      "path": "/ftp/package-lock.json",
+      "path_samples": [
+        "/ftp/package-lock.json"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "4453dc154aeb14d4",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.626,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.626Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-7",
+        "flows/p2_final.jsonl#seq-8"
+      ]
+    },
+    {
+      "id": "ep_0006",
+      "method": "GET",
+      "path": "/ftp/package.json",
+      "path_samples": [
+        "/ftp/package.json"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "4453dc154aeb14d4",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.626,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.625Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-6",
+        "flows/p2_final.jsonl#seq-7"
+      ]
+    },
+    {
+      "id": "ep_0007",
+      "method": "GET",
+      "path": "/ftp/encrypt.py",
+      "path_samples": [
+        "/ftp/encrypt.py"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "4453dc154aeb14d4",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.63,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.629Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-10",
+        "flows/p2_final.jsonl#seq-11"
+      ]
+    },
+    {
+      "id": "ep_0008",
+      "method": "GET",
+      "path": "/ftp/suspicious_errors.yml",
+      "path_samples": [
+        "/ftp/suspicious_errors.yml"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.642,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.642Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-8",
+        "flows/p2_final.jsonl#seq-9"
+      ]
+    },
+    {
+      "id": "ep_0009",
+      "method": "GET",
+      "path": "/ftp/package.json.bak",
+      "path_samples": [
+        "/ftp/package.json.bak"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.645,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.645Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-9",
+        "flows/p2_final.jsonl#seq-10"
+      ]
+    },
+    {
+      "id": "ep_0010",
+      "method": "GET",
+      "path": "/ftp/package-lock.json.bak",
+      "path_samples": [
+        "/ftp/package-lock.json.bak"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.664,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.664Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-11",
+        "flows/p2_final.jsonl#seq-12"
+      ]
+    },
+    {
+      "id": "ep_0011",
+      "method": "GET",
+      "path": "/ftp/legal.md",
+      "path_samples": [
+        "/ftp/legal.md"
+      ],
+      "source": "HAR",
+      "kind": "other",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/markdown"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "af8fffc4b9b2eaf1",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.667,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.666Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-12",
+        "flows/p2_final.jsonl#seq-13"
+      ]
+    },
+    {
+      "id": "ep_0012",
+      "method": "GET",
+      "path": "/ftp/incident-support.kdbx",
+      "path_samples": [
+        "/ftp/incident-support.kdbx"
+      ],
+      "source": "HAR",
+      "kind": "other",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/octet-stream"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "612ce2abbdb9ad42",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.669,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.669Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-13",
+        "flows/p2_final.jsonl#seq-14"
+      ]
+    },
+    {
+      "id": "ep_0013",
+      "method": "GET",
+      "path": "/ftp/encrypt.pyc",
+      "path_samples": [
+        "/ftp/encrypt.pyc"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.694,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.693Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-14",
+        "flows/p2_final.jsonl#seq-15"
+      ]
+    },
+    {
+      "id": "ep_0014",
+      "method": "GET",
+      "path": "/ftp/eastere.gg",
+      "path_samples": [
+        "/ftp/eastere.gg"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119007.701,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:27.701Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-15",
+        "flows/p2_final.jsonl#seq-16"
+      ]
+    },
+    {
+      "id": "ep_0015",
+      "method": "GET",
+      "path": "/ftp/acquisitions.md",
+      "path_samples": [
+        "/ftp/acquisitions.md"
+      ],
+      "source": "HAR",
+      "kind": "other",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/markdown"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "48321ee73b6b6de8",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.488,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.487Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-16",
+        "flows/p2_final.jsonl#seq-17"
+      ]
+    },
+    {
+      "id": "ep_0016",
+      "method": "GET",
+      "path": "/ftp/announcement_encrypted.md",
+      "path_samples": [
+        "/ftp/announcement_encrypted.md"
+      ],
+      "source": "HAR",
+      "kind": "other",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/markdown"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "b032cbb044d3de78",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.489,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.489Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-18",
+        "flows/p2_final.jsonl#seq-19"
+      ]
+    },
+    {
+      "id": "ep_0017",
+      "method": "GET",
+      "path": "/ftp/coupons_2013.md.bak",
+      "path_samples": [
+        "/ftp/coupons_2013.md.bak"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        403
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          403
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "f59cdcea44f3c8e0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.49,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.490Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-17",
+        "flows/p2_final.jsonl#seq-18"
+      ]
+    },
+    {
+      "id": "ep_0018",
+      "method": "GET",
+      "path": "/ftp/quarantine",
+      "path_samples": [
+        "/ftp/quarantine"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "5d45d44fae70fa88",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.511,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.511Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-20",
+        "flows/p2_final.jsonl#seq-21"
+      ]
+    },
+    {
+      "id": "ep_0019",
+      "method": "GET",
+      "path": "/main.js",
+      "path_samples": [
+        "/main.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "a029a0ee1822c924",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.544,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 2,
+        "first_seen_iso": "2026-11-08T06:23:28.543Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-22",
+        "flows/p2_final.jsonl#seq-23",
+        "har/p2_final.har#entry-57",
+        "flows/p2_final.jsonl#seq-58"
+      ]
+    },
+    {
+      "id": "ep_0020",
+      "method": "GET",
+      "path": "/scripts.js",
+      "path_samples": [
+        "/scripts.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "f9a518486ced5551",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.552,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.552Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-21",
+        "flows/p2_final.jsonl#seq-22"
+      ]
+    },
+    {
+      "id": "ep_0021",
+      "method": "GET",
+      "path": "/polyfills.js",
+      "path_samples": [
+        "/polyfills.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "15c6f58707b9b191",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.694,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.694Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-23",
+        "flows/p2_final.jsonl#seq-24"
+      ]
+    },
+    {
+      "id": "ep_0022",
+      "method": "GET",
+      "path": "/chunk-1qQQGal7.js",
+      "path_samples": [
+        "/chunk-1qQQGal7.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "acd90ffd4f65f524",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119008.76,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.760Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-24",
+        "flows/p2_final.jsonl#seq-25"
+      ]
+    },
+    {
+      "id": "ep_0023",
+      "method": "GET",
+      "path": "/text/",
+      "path_samples": [
+        "/text/"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119008.805,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:28.804Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-25",
+        "flows/p2_final.jsonl#seq-26"
+      ]
+    },
+    {
+      "id": "ep_0024",
+      "method": "GET",
+      "path": "/Edge/",
+      "path_samples": [
+        "/Edge/"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119009.488,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.487Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-27",
+        "flows/p2_final.jsonl#seq-28"
+      ]
+    },
+    {
+      "id": "ep_0025",
+      "method": "GET",
+      "path": "/%7B%7Bhref%7D%7D",
+      "path_samples": [
+        "/%7B%7Bhref%7D%7D"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119009.489,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.488Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-26",
+        "flows/p2_final.jsonl#seq-27"
+      ]
+    },
+    {
+      "id": "ep_0026",
+      "method": "GET",
+      "path": "/Trident/",
+      "path_samples": [
+        "/Trident/"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119009.533,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.532Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-28",
+        "flows/p2_final.jsonl#seq-29"
+      ]
+    },
+    {
+      "id": "ep_0027",
+      "method": "GET",
+      "path": "/zone.js",
+      "path_samples": [
+        "/zone.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119009.534,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.534Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-29",
+        "flows/p2_final.jsonl#seq-30"
+      ]
+    },
+    {
+      "id": "ep_0028",
+      "method": "GET",
+      "path": "/Zone.js",
+      "path_samples": [
+        "/Zone.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119009.575,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.574Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-30",
+        "flows/p2_final.jsonl#seq-31"
+      ]
+    },
+    {
+      "id": "ep_0029",
+      "method": "GET",
+      "path": "/chunk-Cv2YgWUq.js",
+      "path_samples": [
+        "/chunk-Cv2YgWUq.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "fbc703799bc777df",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119009.584,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.584Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-32",
+        "flows/p2_final.jsonl#seq-33"
+      ]
+    },
+    {
+      "id": "ep_0030",
+      "method": "GET",
+      "path": "/chunk-DBPdFzgj.js",
+      "path_samples": [
+        "/chunk-DBPdFzgj.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "97f1c69840855dfd",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119009.611,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.611Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-31",
+        "flows/p2_final.jsonl#seq-32"
+      ]
+    },
+    {
+      "id": "ep_0031",
+      "method": "GET",
+      "path": "/rolldown-runtime-BoHGiXSq.js",
+      "path_samples": [
+        "/rolldown-runtime-BoHGiXSq.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "68e9792c539bcfd8",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119009.684,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.683Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-33",
+        "flows/p2_final.jsonl#seq-34"
+      ]
+    },
+    {
+      "id": "ep_0032",
+      "method": "GET",
+      "path": "/styles.css",
+      "path_samples": [
+        "/styles.css"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/css"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "5f276ee5a575d172",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119009.708,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:29.707Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-34",
+        "flows/p2_final.jsonl#seq-35"
+      ]
+    },
+    {
+      "id": "ep_0033",
+      "method": "GET",
+      "path": "/about.component-CqdnxQ-q.js",
+      "path_samples": [
+        "/about.component-CqdnxQ-q.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "987d688c0bc7ae5e",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119010.708,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:30.707Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-36",
+        "flows/p2_final.jsonl#seq-37"
+      ]
+    },
+    {
+      "id": "ep_0034",
+      "method": "GET",
+      "path": "/%5C/index%5C.html",
+      "path_samples": [
+        "/%5C/index%5C.html"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119010.71,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:30.709Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-35",
+        "flows/p2_final.jsonl#seq-36"
+      ]
+    },
+    {
+      "id": "ep_0035",
+      "method": "GET",
+      "path": "/recycle.component-BGn9yQWr.js",
+      "path_samples": [
+        "/recycle.component-BGn9yQWr.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "77cdce82c27778bb",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119010.754,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:30.754Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-37",
+        "flows/p2_final.jsonl#seq-38"
+      ]
+    },
+    {
+      "id": "ep_0036",
+      "method": "GET",
+      "path": "/coding-challenge-page.component-Sl0Kca01.js",
+      "path_samples": [
+        "/coding-challenge-page.component-Sl0Kca01.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "fe656c0850a3af6b",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119011.027,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:31.026Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-38",
+        "flows/p2_final.jsonl#seq-39"
+      ]
+    },
+    {
+      "id": "ep_0037",
+      "method": "GET",
+      "path": "/web3-sandbox.module-BmlpKNfJ.js",
+      "path_samples": [
+        "/web3-sandbox.module-BmlpKNfJ.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "85fea39879b0619f",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119011.069,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:31.069Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-39",
+        "flows/p2_final.jsonl#seq-40"
+      ]
+    },
+    {
+      "id": "ep_0038",
+      "method": "GET",
+      "path": "/wallet-web3.module-wTOnhm_r.js",
+      "path_samples": [
+        "/wallet-web3.module-wTOnhm_r.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "ae348a7ccfa2e360",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119011.149,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:31.149Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-40",
+        "flows/p2_final.jsonl#seq-41"
+      ]
+    },
+    {
+      "id": "ep_0039",
+      "method": "GET",
+      "path": "/chunk-DLd71CGW.js",
+      "path_samples": [
+        "/chunk-DLd71CGW.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "1ac6ae38c5973c6d",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119011.166,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:31.165Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-41",
+        "flows/p2_final.jsonl#seq-42"
+      ]
+    },
+    {
+      "id": "ep_0040",
+      "method": "GET",
+      "path": "/chunk-efcD3uPo.js",
+      "path_samples": [
+        "/chunk-efcD3uPo.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "ebae935f2baeb979",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119011.192,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:31.191Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-42",
+        "flows/p2_final.jsonl#seq-43"
+      ]
+    },
+    {
+      "id": "ep_0041",
+      "method": "GET",
+      "path": "/faucet.module-C29hbfVs.js",
+      "path_samples": [
+        "/faucet.module-C29hbfVs.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "2aec83c438b5220e",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119013.574,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.573Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-43",
+        "flows/p2_final.jsonl#seq-44"
+      ]
+    },
+    {
+      "id": "ep_0042",
+      "method": "GET",
+      "path": "/chunk-LgKEbQmx.js",
+      "path_samples": [
+        "/chunk-LgKEbQmx.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "141d3aef8fbb7b3b",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119013.622,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.622Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-44",
+        "flows/p2_final.jsonl#seq-45"
+      ]
+    },
+    {
+      "id": "ep_0043",
+      "method": "GET",
+      "path": "/redirect",
+      "path_samples": [
+        "/redirect"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        406
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [
+        {
+          "name": "to",
+          "in": "query",
+          "observed_values": [
+            "http",
+            "https"
+          ]
+        }
+      ],
+      "auth": {
+        "schemes": [],
+        "required": null,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "7e752a9ccd203d5e",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119013.778,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 2,
+        "first_seen_iso": "2026-11-08T06:23:33.778Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-45",
+        "flows/p2_final.jsonl#seq-46",
+        "har/p2_final.har#entry-48",
+        "flows/p2_final.jsonl#seq-49"
+      ]
+    },
+    {
+      "id": "ep_0044",
+      "method": "GET",
+      "path": "/application/vnd.ms-word.do",
+      "path_samples": [
+        "/application/vnd.ms-word.do"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119013.842,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.842Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-46",
+        "flows/p2_final.jsonl#seq-47"
+      ]
+    },
+    {
+      "id": "ep_0045",
+      "method": "GET",
+      "path": "/application/vnd.openxmlformats-officedocument.wordprocessingml.do",
+      "path_samples": [
+        "/application/vnd.openxmlformats-officedocument.wordprocessingml.do"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119013.851,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.850Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-47",
+        "flows/p2_final.jsonl#seq-48"
+      ]
+    },
+    {
+      "id": "ep_0046",
+      "method": "GET",
+      "path": "/juice-shop/build/lib/insecurity.js",
+      "path_samples": [
+        "/juice-shop/build/lib/insecurity.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119013.915,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.915Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-49",
+        "flows/p2_final.jsonl#seq-50"
+      ]
+    },
+    {
+      "id": "ep_0047",
+      "method": "GET",
+      "path": "/juice-shop/build/routes/verify.js",
+      "path_samples": [
+        "/juice-shop/build/routes/verify.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119013.96,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.960Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-50",
+        "flows/p2_final.jsonl#seq-51"
+      ]
+    },
+    {
+      "id": "ep_0048",
+      "method": "GET",
+      "path": "/juice-shop/node_modules/express/lib/router/index.js",
+      "path_samples": [
+        "/juice-shop/node_modules/express/lib/router/index.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119013.963,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:33.962Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-51",
+        "flows/p2_final.jsonl#seq-52"
+      ]
+    },
+    {
+      "id": "ep_0049",
+      "method": "GET",
+      "path": "/juice-shop/node_modules/express/lib/router/route.js",
+      "path_samples": [
+        "/juice-shop/node_modules/express/lib/router/route.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119014.023,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:34.023Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-52",
+        "flows/p2_final.jsonl#seq-53"
+      ]
+    },
+    {
+      "id": "ep_0050",
+      "method": "GET",
+      "path": "/juice-shop/node_modules/express/lib/router/layer.js",
+      "path_samples": [
+        "/juice-shop/node_modules/express/lib/router/layer.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119014.514,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:34.514Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-53",
+        "flows/p2_final.jsonl#seq-54"
+      ]
+    },
+    {
+      "id": "ep_0051",
+      "method": "GET",
+      "path": "/juice-shop/build/routes/redirect.js",
+      "path_samples": [
+        "/juice-shop/build/routes/redirect.js"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119014.526,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:34.525Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-54",
+        "flows/p2_final.jsonl#seq-55"
+      ]
+    },
+    {
+      "id": "ep_0052",
+      "method": "GET",
+      "path": "/confetti-CBIxuiwe.js",
+      "path_samples": [
+        "/confetti-CBIxuiwe.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "b5b2c663c63a35de",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119014.66,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:34.660Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-55",
+        "flows/p2_final.jsonl#seq-56"
+      ]
+    },
+    {
+      "id": "ep_0053",
+      "method": "GET",
+      "path": "/hacking-instructor-Dj9tjwgl.js",
+      "path_samples": [
+        "/hacking-instructor-Dj9tjwgl.js"
+      ],
+      "source": "HAR",
+      "kind": "static",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/javascript"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "26258c9ae37bf2a0",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119014.675,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 2,
+        "first_seen_iso": "2026-11-08T06:23:34.674Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-56",
+        "flows/p2_final.jsonl#seq-57",
+        "har/p2_final.har#entry-59",
+        "flows/p2_final.jsonl#seq-60"
+      ]
+    },
+    {
+      "id": "ep_0054",
+      "method": "GET",
+      "path": "/%60+_%28i%5B8%5D%29+%60",
+      "path_samples": [
+        "/%60+_%28i%5B8%5D%29+%60"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119015.673,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:35.673Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-58",
+        "flows/p2_final.jsonl#seq-59"
+      ]
+    },
+    {
+      "id": "ep_0055",
+      "method": "GET",
+      "path": "/%60+_%28i%5B11%5D%7C%7Cf%5Bg.toLowerCase%28%29%5D%29+%60",
+      "path_samples": [
+        "/%60+_%28i%5B11%5D%7C%7Cf%5Bg.toLowerCase%28%29%5D%29+%60"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "host.docker.internal:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119015.863,
+        "first_client": "web-reverse-lab-crawler/0.1",
+        "clients": [
+          "web-reverse-lab-crawler/0.1"
+        ],
+        "phase": "crawl",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:35.863Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-60",
+        "flows/p2_final.jsonl#seq-61"
+      ]
+    },
+    {
+      "id": "ep_0056",
+      "method": "GET",
+      "path": "/api/Products",
+      "path_samples": [
+        "/api/Products"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "dbdec400bf65cf72",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119035.854,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:55.854Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-62",
+        "flows/p2_final.jsonl#seq-63"
+      ]
+    },
+    {
+      "id": "ep_0057",
+      "method": "GET",
+      "path": "/rest/products/search",
+      "path_samples": [
+        "/rest/products/search"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [
+        {
+          "name": "q",
+          "in": "query",
+          "observed_values": [
+            "apple"
+          ]
+        }
+      ],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "2deea7223b900615",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119035.994,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:55.994Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-63",
+        "flows/p2_final.jsonl#seq-64"
+      ]
+    },
+    {
+      "id": "ep_0058",
+      "method": "GET",
+      "path": "/rest/products/{int}/reviews",
+      "path_samples": [
+        "/rest/products/1/reviews"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "0a2060ab45c96f54",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.107,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.106Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-64",
+        "flows/p2_final.jsonl#seq-65"
+      ]
+    },
+    {
+      "id": "ep_0059",
+      "method": "GET",
+      "path": "/rest/user/whoami",
+      "path_samples": [
+        "/rest/user/whoami"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "e436ef2b7de06788",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.228,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.227Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-65",
+        "flows/p2_final.jsonl#seq-66"
+      ]
+    },
+    {
+      "id": "ep_0060",
+      "method": "GET",
+      "path": "/rest/basket/{int}",
+      "path_samples": [
+        "/rest/basket/1"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        401
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          401
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "75f50e0265066064",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.339,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.339Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-66",
+        "flows/p2_final.jsonl#seq-67"
+      ]
+    },
+    {
+      "id": "ep_0061",
+      "method": "GET",
+      "path": "/api/BasketItems",
+      "path_samples": [
+        "/api/BasketItems"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        401
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          401
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "75f50e0265066064",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.438,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.438Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-67",
+        "flows/p2_final.jsonl#seq-68"
+      ]
+    },
+    {
+      "id": "ep_0062",
+      "method": "GET",
+      "path": "/api/Users",
+      "path_samples": [
+        "/api/Users"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        401
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": true,
+        "statuses_without_credentials": [
+          401
+        ]
+      },
+      "client_algo": [],
+      "body_sha256_16": "75f50e0265066064",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.541,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.540Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-68",
+        "flows/p2_final.jsonl#seq-69"
+      ]
+    },
+    {
+      "id": "ep_0063",
+      "method": "GET",
+      "path": "/rest/admin/application-version",
+      "path_samples": [
+        "/rest/admin/application-version"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "22b6d6eb3afaafa8",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.641,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.641Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-69",
+        "flows/p2_final.jsonl#seq-70"
+      ]
+    },
+    {
+      "id": "ep_0064",
+      "method": "GET",
+      "path": "/rest/admin/application-configuration",
+      "path_samples": [
+        "/rest/admin/application-configuration"
+      ],
+      "source": "HAR",
+      "kind": "api",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "application/json"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "b7d51dc45f9e0817",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.751,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.751Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-70",
+        "flows/p2_final.jsonl#seq-71"
+      ]
+    },
+    {
+      "id": "ep_0065",
+      "method": "GET",
+      "path": "/api-docs/",
+      "path_samples": [
+        "/api-docs/"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "3d1f21ff983b7b71",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.865,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.864Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-71",
+        "flows/p2_final.jsonl#seq-72"
+      ]
+    },
+    {
+      "id": "ep_0066",
+      "method": "GET",
+      "path": "/api-docs/swagger.json",
+      "path_samples": [
+        "/api-docs/swagger.json"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "3d1f21ff983b7b71",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119036.964,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:56.963Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-72",
+        "flows/p2_final.jsonl#seq-73"
+      ]
+    },
+    {
+      "id": "ep_0067",
+      "method": "GET",
+      "path": "/metrics",
+      "path_samples": [
+        "/metrics"
+      ],
+      "source": "HAR",
+      "kind": "other",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/plain"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "7167f266eae0c114",
+      "spa_shell": false,
+      "discovery": {
+        "first_ts": 1794119037.064,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:23:57.064Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-73",
+        "flows/p2_final.jsonl#seq-74"
+      ]
+    },
+    {
+      "id": "ep_0068",
+      "method": "GET",
+      "path": "/this-route-should-not-exist-9f3a",
+      "path_samples": [
+        "/this-route-should-not-exist-9f3a"
+      ],
+      "source": "HAR",
+      "kind": "document",
+      "statuses": [
+        200
+      ],
+      "content_types": [
+        "text/html"
+      ],
+      "observed_authorities": [
+        "127.0.0.1:3000"
+      ],
+      "params": [],
+      "auth": {
+        "schemes": [],
+        "required": false,
+        "statuses_without_credentials": []
+      },
+      "client_algo": [],
+      "body_sha256_16": "21cbe884eaf2c3b3",
+      "spa_shell": true,
+      "discovery": {
+        "first_ts": 1794119043.256,
+        "first_client": "web-reverse-lab-baseline-replay/0.1",
+        "clients": [
+          "web-reverse-lab-baseline-replay/0.1"
+        ],
+        "phase": "replay",
+        "hits": 1,
+        "first_seen_iso": "2026-11-08T06:24:03.255Z"
+      },
+      "evidence_ref": [
+        "har/p2_final.har#entry-75",
+        "flows/p2_final.jsonl#seq-76"
+      ]
+    }
+  ],
+  "out_of_scope": [
+    {
+      "authority": "burpsuite",
+      "method": "GET",
+      "path": "/",
+      "status": 0,
+      "har_ref": "har/p2_final.har#entry-0",
+      "note": ""
+    },
+    {
+      "authority": "burpsuite",
+      "method": "GET",
+      "path": "/",
+      "status": 0,
+      "har_ref": "har/p2_final.har#entry-3",
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+# =============================================================================
+# web_reverse_lab —— 网站逆向的观测基座（P1）
+# -----------------------------------------------------------------------------
+# 这份文件只声明**两类**服务，用 compose profile 隔开，避免"一条 up 把所有东西
+# 都拉起来"那种不可复核的启动方式：
+#
+#   observe : mitmproxy —— 唯一的流量入口，也是唯一的证据来源
+#   range   : 靶场（可选，默认不启动；端口刻意避开你已在跑的 3000）
+#
+# 三条必须理解的边界设定：
+#   1. 端口一律绑 127.0.0.1 —— 宿主机浏览器能用，局域网看不见；
+#   2. 出口靠 mitmproxy 的 allow_hosts 白名单收紧（不是靠 network=internal）——
+#      因为目标在宿主机，容器必须能到 host-gateway，物理隔离在此不成立，
+#      只能用"代理拒绝连去哪"来替代，而这条规则写在 .env 里、可复核；
+#   3. 容器不能改代码：collectors/ 只读挂载，唯一可写是 evidence/ 与 artifacts/。
+# =============================================================================
+
+name: web-reverse-lab
+
+services:
+  # ---------------------------------------------------------------------------
+  # 观测点。为什么用 mitmdump 而不是 mitmweb：
+  #   mitmweb 自带一个 Web UI 进程，多一个监听端口、多一份状态，
+  #   而本工程的"界"应该是宿主机浏览器 + 落盘的 JSONL，不是又一个后台面板。
+  #   需要看实时流量时，临时 `docker compose run --rm mitmproxy mitmweb` 即可。
+  # ---------------------------------------------------------------------------
+  mitmproxy:
+    image: web-reverse-lab/mitmproxy:${MITM_TAG:-11.1.0}
+    profiles: ["observe"]
+    # 显式 entrypoint：官方镜像的 ENTRYPOINT 随版本变动过，钉死它，
+    # 这样 command 里就只剩参数，升级镜像不会悄悄跑成别的模式。
+    entrypoint: ["mitmdump"]
+    command:
+      - "--set"
+      - "listen_host=0.0.0.0"
+      - "--set"
+      - "listen_port=8080"
+      # ---- 出口白名单：本工程唯一的出网边界（见 .env.example 的说明） ----
+      - "--set"
+      - "allow_hosts=${ALLOW_HOSTS:-^(host\\.docker\\.internal|127\\.0\\.0\\.1|localhost)(:[0-9]+)?}"
+      # 大响应体缓存上限：超过 2m 的流式响应不再全量驻留内存
+      - "--set"
+      - "stream_large_bodies=2m"
+      # 单次上游连接超时：靶场在本地，15s 足够；超时会让证据里出现 "error" 行，
+      # 而不是让 compose 卡住
+      - "--set"
+      - "connection_timeout=15"
+      # 官方镜像以 root 运行（实测：confdir 默认 /root/.mitmproxy，不是 /home/mitm），
+      # 而根文件系统是只读的，必须把 CA 证书目录指到唯一可写的挂载点上去。
+      - "--set"
+      - "confdir=/root/.mitmproxy"
+      - "-s"
+      - "/opt/web-reverse/mitm_observe.py"
+    ports:
+      # 只绑回环。8081 是 mitmweb UI 的保留位，本 profile 不监听，写在这里是给
+      # "临时跑 mitmweb" 那条命令留位置，避免那时才想起要改文件。
+      - "127.0.0.1:${MITM_PORT:-8080}:8080"
+    volumes:
+      - ./collectors:/opt/web-reverse:ro
+      - ./evidence:/evidence
+      - ./artifacts/mitmproxy:/root/.mitmproxy
+      # 契约产物目录：har_to_contract.py 的输出落点，也供 L3–L6 只读引用。
+      - ./contracts:/contracts
+    environment:
+      EVIDENCE_DIR: /evidence
+      RUN_ID: ${RUN_ID:-}
+      TARGET_HOST_ALIAS: ${TARGET_HOST_ALIAS:-}
+      PYTHONUNBUFFERED: "1"
+      # 只读根文件系统下 Python 会尝试写 __pycache__ 而失败，两个变量一起关掉
+      PYTHONDONTWRITEBYTECODE: "1"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 768m
+    pids_limit: 256
+    restart: "no"
+    labels:
+      com.web-reverse-lab.purpose: "authorized-web-reverse-observer"
+      com.web-reverse-lab.boundary: "ports=127.0.0.1 only; egress=allow_hosts"
+
+  # ---------------------------------------------------------------------------
+  # L2 爬虫（katana）。按需 profile，不常驻（D5）。
+  #
+  # 为什么让它跑在容器里、经 mitmproxy 出去，而不是在宿主机上直连：
+  #   1. 它抓到的每一条都必须经过代理，才能变成证据——绕开代理的爬虫结果
+  #      没有 evidence_ref，按 L5 的纪律根本不能进报告；
+  #   2. 爬虫的 UA、并发、限速都写在 compose 里，可复核；写在命令行里就成了
+  #      "上次那个参数是怎么写的"。
+  #
+  # -jc 是解析 JS 里的端点（不是执行 JS）；要执行 JS 得开 -headless（镜像里有
+  # chromium，但那属于 P3 的 Playwright 轨道，本阶段刻意不开）。
+  # -kf all 要求 depth>=3，两者是一组，别只改一个。
+  # ---------------------------------------------------------------------------
+  crawler:
+    image: web-reverse-lab/katana:${KATANA_TAG:-latest}
+    profiles: ["crawl"]
+    depends_on:
+      mitmproxy:
+        condition: service_started
+    # entrypoint 用 sh 包一层，把 stdin 接到 /dev/null —— **这一层不能省**：
+    # katana 支持 `cat urls.txt | katana`，只要 stdin 是个「活管道」它就去读输入、
+    # 读到 EOF 才继续。而 `docker compose run`（含 -d、含 -T）会保留一个永不关闭的
+    # stdin，于是它永久阻塞在输入读取上：
+    #   实测 /proc/1/wchan=futex_do_wait、CPU 0.03%、180 秒零输出、代理侧只有 1 条流量，
+    #   症状极像"这站没链接"，其实是爬虫在等 stdin。
+    # `docker run` 默认 stdin=/dev/null，所以手工验证永远复现不出来——这就是坑。
+    # 对照实验：同一个镜像加 -i 启动 0 行输出；用 `< /dev/null` 包一层立刻 15~105 行。
+    # $$@ 是 compose 的转义写法（$$ -> $），否则 $@ 会被当成变量插值报错。
+    entrypoint: ["sh", "-c", "exec katana \"$$@\" < /dev/null", "--"]
+    command:
+      - "-u"
+      - "${CRAWL_URL:-http://host.docker.internal:3000}"
+      - "-proxy"
+      - "${CRAWL_PROXY:-http://mitmproxy:8080}"
+      - "-f"
+      - "url"                   # 只输出 URL：完整响应体在 HAR 里，这里不需要第二份
+      - "-silent"
+      - "-d"
+      - "${CRAWL_DEPTH:-3}"
+      - "-jc"                   # 解析 JS 文件里的端点
+      - "-jsl"                  # jsluice：更强的 JS 端点抽取（内存换召回）
+      - "-kf"
+      - "all"                   # robots.txt / sitemap.xml
+      - "-fs"
+      - "${CRAWL_SCOPE:-dn}"    # 作用域钉在当前主机名本身（dn=域名）：实测 rdn 会把
+                                # host.docker.internal 的"注册域"放宽，main.js 里引用的
+                                # owasp.org / opensea 等站外链接也会进作用域，白跑还脏证据
+      - "-c"
+      - "${CRAWL_CONCURRENCY:-3}"
+      - "-p"
+      - "1"
+      - "-rl"
+      - "${CRAWL_RATE_LIMIT:-10}"   # 单用户靶场，宁可慢，别把它打成压测
+      - "-timeout"
+      - "15"
+      - "-H"
+      - "User-Agent: web-reverse-lab-crawler/0.1"
+    volumes:
+      - ./artifacts/crawl:/crawl
+    # **CWD 必须可写**：只读根文件系统 + read_only 时，CWD 默认是 `/`，而 katana 的
+    # JS 抽取（-jc/-jsl）会往当前目录写临时文件，于是它就地卡住——实测 CPU 0.03%、
+    # 内存 17 MiB、5 分钟零输出，看着像"这站没链接"，其实是容器把自己锁死了。
+    # 挂到 /crawl 既解决写权限，又让任何残留文件都落在可审计的产物目录里。
+    working_dir: /crawl
+    read_only: true
+    tmpfs:
+      # /root 必须可写：katana 在**解析 flag 阶段**就要往 $HOME 写东西，只读根
+      # 文件系统下它直接 "[FTL] Could not read flags: read-only file system" 秒退，
+      # 且不给任何输出——表现为"爬虫成功但 0 行发现"，极易误判成"站点没有链接"。
+      - /root
+      - /tmp
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 1g
+    pids_limit: 256
+    restart: "no"
+    labels:
+      com.web-reverse-lab.purpose: "authorized-local-crawler (L2)"
+      com.web-reverse-lab.boundary: "egress only via mitmproxy; scope=rdn"
+
+  # ---------------------------------------------------------------------------
+  # 靶场。默认不启动（要 --profile range）。端口用 3001 而不是 3000：
+  # 你宿主机上已有一个 juice-shop 占着 127.0.0.1:3000（实测 Up 20 小时），
+  # 同名端口会直接冲突——冲突表现是 compose 报 "port is already allocated"，
+  # 而不是"靶场起不来"，很容易误判成镜像问题。
+  # 用它时记得把 .env 的 TARGET_HOST_ALIAS 追加
+  #   127.0.0.1:3001=host.docker.internal:3001
+  # ---------------------------------------------------------------------------
+  range:
+    image: web-reverse-lab/juice-shop:${RANGE_TAG:-latest}
+    profiles: ["range"]
+    ports:
+      - "127.0.0.1:3001:3000"
+    networks:
+      - default
+    mem_limit: 1g
+    restart: "no"
+    labels:
+      com.web-reverse-lab.purpose: "authorized-local-range"
